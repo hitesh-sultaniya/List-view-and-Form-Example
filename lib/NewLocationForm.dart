@@ -30,10 +30,8 @@ class _NewLocationFormState extends State<NewLocationForm> {
         ],
       ),
       floatingActionButton: new FloatingActionButton(
-        child: new IconButton(
-          icon: new Icon(Icons.my_location),
-          onPressed: (){},
-        ),
+        child: new Icon(Icons.my_location),
+        onPressed: () {},
       ),
       body: new SafeArea(
         top: false,
