@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'utils/CustomNavigator.dart';
 
 
 class ListScreen extends StatefulWidget {
@@ -25,7 +26,9 @@ class _ListScreenState extends State<ListScreen> {
           child: new Scaffold(
             floatingActionButton: new FloatingActionButton(
               child: new Icon(FontAwesomeIcons.plus),
-              onPressed: (){},
+              onPressed: (){
+                TourNavigator.goToLocationForm(context);
+              },
             ),
           ),
     ),

@@ -9,9 +9,12 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new Center(
-        child: new Text("Welcome to the Map Screen !"),
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text('Map'),
+      ),
+       body: new Center(
+        child: new Text("Welcome to Map Screen. !")
       ),
     );
   }

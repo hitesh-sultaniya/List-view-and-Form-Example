@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'HomeScreen.dart';
+import 'NewLocationForm.dart';
 import 'SplashScreen.dart';
 
 var routes = <String, WidgetBuilder>{
   "/HomeScreen": (BuildContext context) => HomeScreen(),
+  "/NewLocationForm" : (BuildContext context) => NewLocationForm(),
 };
 
 
