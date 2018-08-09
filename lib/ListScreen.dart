@@ -10,6 +10,15 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
 
+  TextFormField _tourName = new TextFormField(
+              decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: false,
+                  icon: Icon(Icons.location_on),
+                  labelText: 'Tour Name *',
+                ),
+            );
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -17,21 +26,37 @@ class _ListScreenState extends State<ListScreen> {
         title: new Text('Tour Planner'),
         actions: <Widget>[
           IconButton(
-            icon: new Icon(FontAwesomeIcons.search),
-            onPressed: (){},
+            icon: new Icon(FontAwesomeIcons.plus),
+            onPressed: (){
+              TourNavigator.goToLocationForm(context);
+            },
           ),
         ],
       ),
-      body: new Center(
-          child: new Scaffold(
-            floatingActionButton: new FloatingActionButton(
-              child: new Icon(FontAwesomeIcons.plus),
-              onPressed: (){
-                TourNavigator.goToLocationForm(context);
-              },
+      body: new SafeArea(
+        top: false,
+        bottom: false,
+        child: new Form(
+          autovalidate: false,
+          child: new SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const SizedBox(height: 10.0),
+                new TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    filled: false,
+                    icon: Icon(Icons.location_on),
+                    labelText: 'Tour Name *',
+                  ),
+                ),
+              ],
             ),
           ),
-    ),
+        ),
+       ),
     );
   }
 }

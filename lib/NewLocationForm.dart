@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NewLocationForm extends StatefulWidget {
   @override
@@ -23,14 +22,10 @@ class _NewLocationFormState extends State<NewLocationForm> {
               Navigator.pop(context);
             },
           ),
-          IconButton(
-            icon: new Icon(FontAwesomeIcons.search),
-            onPressed: (){},
-          ),
         ],
       ),
       floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.my_location),
+        child: new Icon(Icons.location_searching),
         onPressed: () {},
       ),
       body: new SafeArea(
@@ -49,7 +44,6 @@ class _NewLocationFormState extends State<NewLocationForm> {
                     border: UnderlineInputBorder(),
                     filled: false,
                     icon: Icon(Icons.location_on),
-                    hintText: 'Add location name.',
                     labelText: 'Name *',
                   ),
                 ),
@@ -58,7 +52,6 @@ class _NewLocationFormState extends State<NewLocationForm> {
                     border: UnderlineInputBorder(),
                     filled: false,
                     icon: Icon(Icons.location_city),
-                    hintText: 'Add City Name.',
                     labelText: 'City *',
                   ),
                 ),
@@ -67,7 +60,6 @@ class _NewLocationFormState extends State<NewLocationForm> {
                     border: UnderlineInputBorder(),
                     filled: false,
                     icon: Icon(Icons.location_city),
-                    hintText: 'Add State Name',
                     labelText: 'State *',
                   ),
                 ),
@@ -76,7 +68,6 @@ class _NewLocationFormState extends State<NewLocationForm> {
                     border: UnderlineInputBorder(),
                     filled: false,
                     icon: Icon(Icons.location_city),
-                    hintText: 'Add Country Name.',
                     labelText: 'Country *',
                   ),
                 ),
@@ -85,8 +76,23 @@ class _NewLocationFormState extends State<NewLocationForm> {
                     border: UnderlineInputBorder(),
                     filled: false,
                     icon: Icon(Icons.location_city),
-                    hintText: 'Add Pin/Zip Code.',
                     labelText: 'Pin/Zip Code *',
+                  ),
+                ),
+                new TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    filled: false,
+                    icon: Icon(Icons.location_city),
+                    labelText: 'Latitude *',
+                  ),
+                ),
+                new TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    filled: false,
+                    icon: Icon(Icons.location_city),
+                    labelText: 'Longitude *',
                   ),
                 ),
               ],
