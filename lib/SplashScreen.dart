@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'utils/CustomNavigator.dart';
 
 
@@ -31,10 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
       body: new Center(
         child: new IconTheme(
     data: new IconThemeData(
-        color: Colors.brown,
+        color: Colors.blueGrey,
         size : 200.0
         ), 
-    child: new Icon(FontAwesomeIcons.suitcase),
+    child: new Icon(Icons.my_location),
         )
     )
     );

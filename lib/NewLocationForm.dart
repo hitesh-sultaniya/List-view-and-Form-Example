@@ -12,6 +12,10 @@ class _NewLocationFormState extends State<NewLocationForm> {
       appBar: new AppBar(
         title: new Text('Add Location'),
         actions: <Widget>[
+          IconButton(
+            icon: new Icon(Icons.location_searching),
+            onPressed: () {},
+          ),
           FlatButton(
             child: new Text(
               'Save',
@@ -21,12 +25,8 @@ class _NewLocationFormState extends State<NewLocationForm> {
             onPressed: (){
               Navigator.pop(context);
             },
-          ),
+          )
         ],
-      ),
-      floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.location_searching),
-        onPressed: () {},
       ),
       body: new SafeArea(
         top: false,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'utils/CustomNavigator.dart';
 
 
@@ -23,14 +22,24 @@ class _ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Tour Planner'),
+        title: new Text('Add New Tour'),
         actions: <Widget>[
           IconButton(
-            icon: new Icon(FontAwesomeIcons.plus),
+            icon: new Icon(Icons.add),
             onPressed: (){
               TourNavigator.goToLocationForm(context);
             },
           ),
+          FlatButton(
+            child: new Text(
+              'Save',
+              textScaleFactor: 1.25,
+            ),
+            textColor: Colors.white,
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          )
         ],
       ),
       body: new SafeArea(
@@ -44,14 +53,7 @@ class _ListScreenState extends State<ListScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const SizedBox(height: 10.0),
-                new TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    icon: Icon(Icons.location_on),
-                    labelText: 'Tour Name *',
-                  ),
-                ),
+                _tourName,
               ],
             ),
           ),
