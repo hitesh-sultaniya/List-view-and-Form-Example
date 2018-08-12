@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'utils/CustomNavigator.dart';
-
+import 'NewLocationForm.dart';
+import 'models/LocationModel.dart';
 
 class ListScreen extends StatefulWidget {
   @override
@@ -8,6 +8,8 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
+
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   TextFormField _tourName = new TextFormField(
               decoration: const InputDecoration(
@@ -18,16 +20,29 @@ class _ListScreenState extends State<ListScreen> {
                 ),
             );
 
+  void _pushNewLocationFormScreen(BuildContext context) async {
+
+    final LocationModel newLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NewLocationForm()),
+    );
+
+    String locationName = newLocation.locationName;
+    // After the Selection Screen returns a result, show it in a Snackbar!
+    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Succesfully Added Tour Location $locationName")));
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: scaffoldKey,
       appBar: new AppBar(
         title: new Text('Add New Tour'),
         actions: <Widget>[
           IconButton(
             icon: new Icon(Icons.add),
-            onPressed: (){
-              TourNavigator.goToLocationForm(context);
+            onPressed: () {
+              _pushNewLocationFormScreen(this.context);
             },
           ),
           FlatButton(
