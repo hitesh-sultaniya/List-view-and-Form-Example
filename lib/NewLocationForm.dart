@@ -64,7 +64,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
     }
     else
     {
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("City, State And Country are Mendatory to get latitude and longitude !")));
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Name, Street, City, State And Country are Mendatory!")));
     }
 
   }
