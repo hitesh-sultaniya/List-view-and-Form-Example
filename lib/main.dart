@@ -14,7 +14,7 @@ var routes = <String, WidgetBuilder>{
 void main() {
   runApp(new MaterialApp(
     title: 'Tour Path',
-    theme: new ThemeData(primaryColor: Colors.blueGrey, accentColor: Colors.blueAccent),
+    theme: new ThemeData(primaryColor: Colors.purple, accentColor: Colors.purpleAccent,splashColor: Colors.purple),
     debugShowCheckedModeBanner: false,
     home: new SplashScreen(),
     routes:routes

@@ -10,26 +10,19 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  TextFormField _tourName = new TextFormField(
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  filled: false,
-                  icon: Icon(Icons.location_on),
-                  labelText: 'Tour Name *',
-                ),
-            );
-
+  List<LocationModel> arrLocationList = new List();
+  
   void _pushNewLocationFormScreen(BuildContext context) async {
 
     final LocationModel newLocation = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => NewLocationForm()),
     );
-
-    String locationName = newLocation.locationName;
-    // After the Selection Screen returns a result, show it in a Snackbar!
-    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Succesfully Added Tour Location $locationName")));
+    if (newLocation != null) {
+      arrLocationList.add(newLocation);
+      String locationName = newLocation.locationName;
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Succesfully Added Tour Location $locationName"))); 
+    }
   }
 
   @override
@@ -60,19 +53,19 @@ class _ListScreenState extends State<ListScreen> {
       body: new SafeArea(
         top: false,
         bottom: false,
-        child: new Form(
-          autovalidate: false,
-          child: new SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const SizedBox(height: 10.0),
-                _tourName,
-              ],
-            ),
-          ),
-        ),
+        child: new ListView.builder(
+          itemCount: arrLocationList.length,
+          itemBuilder: (context,index) {
+            return Card(
+              elevation: 5.0,
+              child: new ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                title: new Text(arrLocationList[index].locationName,textScaleFactor:1.05,style: TextStyle(color: Colors.purple,fontWeight: FontWeight.bold)),
+                subtitle: new Text(arrLocationList[index].cityName+','+arrLocationList[index].stateName+','+arrLocationList[index].countryName, textAlign: TextAlign.right,style: TextStyle(fontStyle: FontStyle.italic),),
+              ),
+            );
+          },
+        )
        ),
     );
   }

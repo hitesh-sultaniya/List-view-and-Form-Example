@@ -12,11 +12,10 @@ class _NewLocationFormState extends State<NewLocationForm> {
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
+  TextEditingController controllerStreetName = new TextEditingController();
   TextEditingController controllerCityName = new TextEditingController();
   TextEditingController controllerStateName = new TextEditingController();
   TextEditingController controllerCountryName = new TextEditingController();
-  TextEditingController controllerLatitude = new TextEditingController();
-  TextEditingController controllerLongitude = new TextEditingController();
   Address fetchedAddress = new Address();
   bool isLoading = false;
   LocationModel currentLocation = new LocationModel();
@@ -33,33 +32,24 @@ class _NewLocationFormState extends State<NewLocationForm> {
     super.dispose();
   }
 
-  void _saveTourLocation() {
-
-   final form = formKey.currentState;
-    
-    if (form.validate()) {
-
-      form.save();
-      Navigator.pop(context,currentLocation);
-    }
-
-  }
-
-   Future getLaLongFromAddress() async {
+   Future getLaLongFromAddressAndSave() async {
 
     this.setState(() {
       this.isLoading = true;
     });
     
-    if (controllerCityName.text.length > 0 && controllerStateName.text.length > 0 && controllerCountryName.text.length > 0) {
+    final form = formKey.currentState;
 
-      String strAddress = controllerCityName.text + ", " + controllerStateName.text + ", " + controllerCountryName.text;
+    if (form.validate()) {
+      form.save();
+      String strAddress = controllerStreetName.text + ", "+controllerCityName.text + ", " + controllerStateName.text + ", " + controllerCountryName.text;
       try{
            var results = await Geocoder.local.findAddressesFromQuery(strAddress);
            this.setState(() {
             fetchedAddress = results.first;
-            controllerLatitude.text = fetchedAddress.coordinates.latitude.toString();
-            controllerLongitude.text = fetchedAddress.coordinates.longitude.toString();
+            currentLocation.latitude = fetchedAddress.coordinates.latitude;
+            currentLocation.longitude = fetchedAddress.coordinates.longitude;
+            Navigator.pop(context,currentLocation);
            });
       }
       catch(e) {
@@ -84,19 +74,15 @@ class _NewLocationFormState extends State<NewLocationForm> {
     return Scaffold(
       key: scaffoldKey,
       appBar: new AppBar(
-        title: new Text('Add Location'),
+        title: new Text('Location'),
         actions: <Widget>[
-          IconButton(
-            icon: new Icon(Icons.location_searching),
-            onPressed: getLaLongFromAddress,
-          ),
           FlatButton(
             child: new Text(
-              'Save',
+              'Add',
               textScaleFactor: 1.25,
             ),
             textColor: Colors.white,
-            onPressed: _saveTourLocation,
+            onPressed: getLaLongFromAddressAndSave,
           )
         ],
       ),
@@ -120,6 +106,17 @@ class _NewLocationFormState extends State<NewLocationForm> {
                   ),
                   validator: (locationName) => locationName.length == 0 ? 'Location Name is Mendatory' : null,
                   onSaved: (locationName) => currentLocation.locationName = locationName,
+                ),
+                new TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    filled: false,
+                    icon: Icon(Icons.location_city),
+                    labelText: 'Street *',
+                  ),
+                  controller: controllerStreetName,
+                  validator: (street) => street.length == 0 ? 'Street is Mendatory' : null,
+                  onSaved: (streetName) => currentLocation.streetName = streetName,
                 ),
                 new TextFormField(
                   decoration: const InputDecoration(
@@ -153,30 +150,6 @@ class _NewLocationFormState extends State<NewLocationForm> {
                   controller: controllerCountryName,
                   validator: (country) => country.length == 0 ? 'Country is Mendatory' : null,
                   onSaved: (countryName) => currentLocation.countryName = countryName,
-                ),
-                new TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    icon: Icon(Icons.location_city),
-                    labelText: 'Latitude *',
-                  ),
-                  controller: controllerLatitude,
-                  validator: (latitude) => latitude.length == 0 ? 'Tap on location button to get latitude' : null,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  onSaved: (latitude) => currentLocation.latitude = double.parse(latitude),
-                ),
-                new TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    icon: Icon(Icons.location_city),
-                    labelText: 'Longitude *',
-                  ),
-                  controller: controllerLongitude,
-                  validator: (longitude) => longitude.length == 0 ? 'Tap on locatin button to get longitude' : null,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  onSaved: (longitude) => currentLocation.longitude = double.parse(longitude),
                 ),
               ],
             ),

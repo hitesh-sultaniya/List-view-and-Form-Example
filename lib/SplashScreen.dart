@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: new Center(
         child: new IconTheme(
     data: new IconThemeData(
-        color: Colors.blueGrey,
+        color: Colors.purple,
         size : 200.0
         ), 
     child: new Icon(Icons.my_location),
